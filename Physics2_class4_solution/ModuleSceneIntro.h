@@ -21,6 +21,9 @@ public:
 	p2List<PhysBody*> circles;
 	p2List<PhysBody*> boxes;
 	p2List<PhysBody*> ricks;
+	/*PhysBody* Cruz;
+	PhysBody* Borde;
+	PhysBody* fireh;*/
 
 	PhysBody* sensor;
 	bool sensed;
