@@ -307,7 +307,7 @@ update_status ModuleSceneIntro::Update()
 	// All draw functions ------------------------------------------------------
 	p2List_item<PhysBody*>* c = circles.getFirst();
 	SDL_Rect y = { 0,0,1920,1200 };
-	App->renderer->Blit(Bg, 0, 0, &y);
+	//App->renderer->Blit(Bg, 0, 0, &y);
 
 	while(c != NULL)
 	{

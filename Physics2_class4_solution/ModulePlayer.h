@@ -1,7 +1,9 @@
 #pragma once
 #include "Module.h"
+#include "p2List.h"
 #include "Globals.h"
 #include "p2Point.h"
+#include "ModuleTextures.h"
 
 class ModulePlayer : public Module
 {
@@ -14,5 +16,10 @@ public:
 	bool CleanUp();
 
 public:
+	SDL_Texture*			ball;
+	p2List<PhysBody*>		circles;
+	PhysBody*				circle;
+
+
 
 };
