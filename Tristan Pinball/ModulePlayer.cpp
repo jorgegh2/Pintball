@@ -109,32 +109,32 @@ update_status ModulePlayer::Update()
 
 
 	// Ball =============================================================
-	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN )
+	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN )
 	{
 		ball->body->SetTransform(b2Vec2(PIXEL_TO_METERS(App->input->GetMouseX()), PIXEL_TO_METERS(App->input->GetMouseY())), 0);
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN && ball)
+	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN && ball)
 	{
 		Reset();
 	}
 
 	// Flippers =============================================================
-	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
 	{
 		engageFlipper(flipper_l, -10.0f);
 		//App->audio->PlayFx(flipper_fx);
 	}
 
 
-	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
 	{
 		engageFlipper(flipper_r, 10.0f);
 	//	App->audio->PlayFx(flipper_fx);
 	}
 
 	// Launcher ==============================================================
-	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT) 
+	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) 
 	{
 		launcher_joint->SetMotorSpeed(-2);
 		impulse_force += 1.2f;
@@ -145,7 +145,7 @@ update_status ModulePlayer::Update()
 		}
 	//	App->audio->PlayFx(kicker_fx);
 	}
-	else if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP) 
+	else if (App->input->GetKey(SDL_SCANCODE_S) == KEY_UP) 
 	{
 		launcher_joint->SetMotorSpeed(impulse_force);
 		impulse_force = 0; //Sfx
