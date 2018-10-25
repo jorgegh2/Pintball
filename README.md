@@ -13,4 +13,7 @@ A-> flipper left
 D-> flipper right
 S-> launcher
 
-No one combo implemented
+**Differences:**
+Pinball incomplete
+
+No combo implemented
