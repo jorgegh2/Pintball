@@ -58,6 +58,7 @@ public:
 	SDL_Texture* ball_tex;
 	SDL_Texture* flipper_tex;
 	SDL_Rect flipper_rect;
+	SDL_Rect flipper_rect_r;
 
 	// Sfx==========================================
 	uint flipper_fx;

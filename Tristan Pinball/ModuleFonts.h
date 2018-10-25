@@ -1,4 +1,4 @@
-#ifndef __ModuleFonts_H__
+/*#ifndef __ModuleFonts_H__
 #define __ModuleFonts_H__
 
 #include "Module.h"
@@ -38,4 +38,4 @@ private:
 };
 
 
-#endif // __ModuleFonts_H__
+#endif // __ModuleFonts_H__*/

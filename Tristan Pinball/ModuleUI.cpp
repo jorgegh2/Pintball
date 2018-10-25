@@ -1,4 +1,4 @@
-#include <string>
+/*#include <string>
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleTextures.h"
@@ -78,4 +78,4 @@ update_status ModuleUI::Update()
 void ModuleUI::AddPoints(int points)
 {
 	current_score += points * multiplier;
-}
+}*/

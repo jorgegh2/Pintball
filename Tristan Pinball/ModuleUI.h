@@ -1,4 +1,4 @@
-#ifndef __MODULEUI_H__
+/*#ifndef __MODULEUI_H__
 #define __MODULEUI_H__
 
 #include "Module.h"
@@ -35,5 +35,5 @@ public:
 
 };
 
-#endif //__MODULEUI_H__
+#endif //__MODULEUI_H__*/
 

@@ -7,7 +7,7 @@
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
-//#include "ModuleUI.h"
+#include "ModuleUI.h"
 
 
 
@@ -15,11 +15,11 @@ ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, s
 {
 	ball_tex = flipper_tex = NULL;
 	lifes = 5;
-	init_position.x = PIXEL_TO_METERS(1062);
-	init_position.y = PIXEL_TO_METERS(1000);
+	init_position.x = PIXEL_TO_METERS(489);
+	init_position.y = PIXEL_TO_METERS(900);
 	impulse_force = 0.0f;
-	launcher_init_pos.x = 1062.f;
-	launcher_init_pos.y = 1050.f;
+	launcher_init_pos.x = 1062.0f;
+	launcher_init_pos.y = 1050.0f;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -31,10 +31,9 @@ bool ModulePlayer::Start()
 	LOG("Loading player");
 	// Textures ======================================================
 	ball_tex = App->textures->Load("textures/Sprites.png");
-	flipper_tex = App->textures->Load("textures/Sprites.png");
-	//flipper_tex = App->textures->Load("textures/Sprites.png");
-	flipper_rect = { 0,86,92,42 };
-	flipper_rect_r = { 115,86,92,42 };
+	flipper_tex = App->textures->Load("textures/flippers.png");
+	flipper_tex = App->textures->Load("textures/flippers.png");
+	flipper_rect = { 0,0,81,27 };
 	// PhysBodies ====================================================
 	int left_flipper[8]
 	{
@@ -56,8 +55,8 @@ bool ModulePlayer::Start()
 	ball->body->SetBullet(true);
 	ball->listener = this;
 
-	flipper_l = App->physics->CreateFlipper(b2Vec2(165+400, 918+110), left_flipper, 8, b2Vec2(133+400, 918+110), -30 , 40 , flipper_l_joint);
-	flipper_r = App->physics->CreateFlipper(b2Vec2(293+353+80, 918+120), right_flipper, 8, b2Vec2(325+353+80, 918+120), -40, 30, flipper_r_joint);
+	flipper_l = App->physics->CreateFlipper(b2Vec2(525, 918), left_flipper, 8, b2Vec2(600, 918), -30 , 40 , flipper_l_joint);
+	flipper_r = App->physics->CreateFlipper(b2Vec2(293, 918), right_flipper, 8, b2Vec2(325, 918), -40, 30, flipper_r_joint);
  	launcher = App->physics->CreateLauncher(launcher_init_pos.x, launcher_init_pos.y, 33, 33, launcher_joint);
 
 	flipper_fx = App->audio->LoadFx("sfx/flipper.wav");
@@ -94,8 +93,8 @@ update_status ModulePlayer::Update()
 	{
 		Reset();
 		lifes = 5;
-		//App->ui->current_score = 0;
-		//App->ui->multiplier = 1;
+		App->ui->current_score = 0;
+		App->ui->multiplier = 1;
 		reset_all = false;
 	}
 	// Game ============================================================
@@ -123,14 +122,14 @@ update_status ModulePlayer::Update()
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
 	{
 		engageFlipper(flipper_l, -10.0f);
-		//App->audio->PlayFx(flipper_fx);
+		App->audio->PlayFx(flipper_fx);
 	}
 
 
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
 	{
 		engageFlipper(flipper_r, 10.0f);
-	//	App->audio->PlayFx(flipper_fx);
+		App->audio->PlayFx(flipper_fx);
 	}
 
 	// Launcher ==============================================================
@@ -143,7 +142,7 @@ update_status ModulePlayer::Update()
 		{
 			impulse_force = 60;
 		}
-	//	App->audio->PlayFx(kicker_fx);
+		App->audio->PlayFx(kicker_fx);
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP) 
 	{
@@ -159,9 +158,9 @@ update_status ModulePlayer::Update()
 
 	// -------Flippers----------------------------------------------
 	flipper_l->GetPosition(x, y);
-	App->renderer->Blit(flipper_tex, x , y - 12, &flipper_rect, 1.0f, flipper_l->GetRotation(), 8,14);
+	App->renderer->Blit(flipper_tex, x -8, y - 12, &flipper_rect, 1.0f, flipper_l->GetRotation(), 8,14);
 	flipper_r->GetPosition(x, y);
-	App->renderer->Blit(flipper_tex, x + 8-100, y , &flipper_rect_r, 1.0f, flipper_r->GetRotation(), 30, 0);
+	App->renderer->Blit(flipper_tex, x - flipper_rect.w +  8, y - 12, &flipper_rect, 1.0f, flipper_r->GetRotation(), flipper_rect.w - 8, flipper_rect.h -14, true);
 	//App->renderer->Blit(flipper_tex, x, y, &rect);
 
 	//--------Ball--------------------------------------------------
@@ -188,14 +187,14 @@ void ModulePlayer::OnCollision(PhysBody* bodyA, PhysBody* bodyB, b2Contact* cont
 	{
 		bodyB->activated = true;
 		// Change bonus ==================================
-		//App->scene_intro->current_bonus = (Bonuses)((int)App->scene_intro->current_bonus + 1);
-	//	if (App->scene_intro->current_bonus == Bonuses::max) {
-		//	App->scene_intro->current_bonus = Bonuses::extra_ball;
-		//}
+		App->scene_intro->current_bonus = (Bonuses)((int)App->scene_intro->current_bonus + 1);
+		if (App->scene_intro->current_bonus == Bonuses::max) {
+			App->scene_intro->current_bonus = Bonuses::extra_ball;
+		}
 		// Add points ====================================
-		//App->ui->AddPoints(1000);
+		App->ui->AddPoints(1000);
 		// Sfx ===========================================
-		//App->audio->PlayFx(App->scene_intro->bonus_fx);
+		App->audio->PlayFx(App->scene_intro->bonus_fx);
 		// Aplly impulse =================================
 		b2Vec2 normal = worldManifold.normal;
 		normal.x *= 1.5f;
@@ -208,9 +207,9 @@ void ModulePlayer::OnCollision(PhysBody* bodyA, PhysBody* bodyB, b2Contact* cont
 	{
 		bodyB->activated = true;
 		// Add points ================================
-		//App->ui->AddPoints(500);
+		App->ui->AddPoints(500);
 		// Sfx =======================================
-		//App->audio->PlayFx(App->scene_intro->bonus_fx);
+		App->audio->PlayFx(App->scene_intro->bonus_fx);
 		// Aplly impulse =============================
 		int random = rand() % 3;
 		b2Vec2 normal = worldManifold.normal;

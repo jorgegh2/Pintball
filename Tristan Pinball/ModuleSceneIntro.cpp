@@ -7,7 +7,7 @@
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
 #include "ModulePlayer.h"
-#include "ModuleUI.h"
+//#include "ModuleUI.h"
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -75,42 +75,42 @@ bool ModuleSceneIntro::Start()
 	
 	// Animation ==============================================
 	// Bumpers --------------------------------
-	for (uint i = 0; i < 3; ++i)
-	{
-		animations[i].rect = {0, 0 ,55,55};
-		animations[i].tex = bumper_tex;
-	}
-	animations[0].position = { 259, 290 };
-	animations[1].position = {147, 290};
-	animations[2].position = {201, 376};
+	//for (uint i = 0; i < 3; ++i)
+	//{
+		//animations[i].rect = {0, 0 ,55,55};
+		//animations[i].tex = bumper_tex;
+	//}
+//	animations[0].position = { 259, 290 };
+	//animations[1].position = {147, 290};
+	//animations[2].position = {201, 376};
 	// Slingshots --------------------------------
-	animations[3].position = { 78, 716};
-	animations[4].position = { 320,716 };
-	animations[3].rect = animations[4].rect = {0, 0, 66, 142};
-	animations[3].tex = animations[4].tex = slingshots_tex;
+	//animations[3].position = { 78, 716};
+	//animations[4].position = { 320,716 };
+	//animations[3].rect = animations[4].rect = {0, 0, 66, 142};
+	//animations[3].tex = animations[4].tex = slingshots_tex;
 
 	// PhyBodies ==============================================
 	AddStaticBodies();
-	sensor_death = App->physics->CreateRectangleSensor(205 + 56 / 2, 1046 + 6 / 2, 56, 6, 0); //the x and y take pos from the center
-	top_hole = App->physics->CreateCircleIsSensor(237, 168, 8);
-	top_hole->listener = this;
-	magnet_hole = App->physics->CreateCircleIsSensor(438, 280, 8);
-	magnet_hole->listener = this;
+	sensor_death = App->physics->CreateRectangleSensor(555 + 200 / 2, 1130 + 6 / 2, 300, 20, 0); //the x and y take pos from the center
+	//top_hole = App->physics->CreateCircleIsSensor(237, 168, 8);
+	//top_hole->listener = this;
+	//magnet_hole = App->physics->CreateCircleIsSensor(438, 280, 8);
+	//magnet_hole->listener = this;
 
 	// Barriers ---------------------------------------
-	sensor_barrier_right = App->physics->CreateRectangleSensor(370, 134, 60, 6, 90);
-	sensor_barrier_right->listener = this;
-	sensor_initial_barrier_left = App->physics->CreateRectangleSensor(78, 188, 36, 10, 50);
-	sensor_initial_barrier_left->listener = this;
-	sensor_final_barrier_left = App->physics->CreateRectangleSensor(140, 147, 80, 6, 90);
-	sensor_final_barrier_left->listener = this;
+	//sensor_barrier_right = App->physics->CreateRectangleSensor(370, 134, 60, 6, 90);
+	//sensor_barrier_right->listener = this;
+	//sensor_initial_barrier_left = App->physics->CreateRectangleSensor(78, 188, 36, 10, 50);
+	//sensor_initial_barrier_left->listener = this;
+	//sensor_final_barrier_left = App->physics->CreateRectangleSensor(140, 147, 80, 6, 90);
+	//sensor_final_barrier_left->listener = this;
 
 	// Music & Fx-------------------------------------------
-	App->audio->PlayMusic("music/house_music.ogg");
-	bonus_fx = App->audio->LoadFx("sfx/bonus.wav");
-	chocolate_combo_sfx = App->audio->LoadFx("sfx/chocolate_combo.wav");
-	targets_fx = App->audio->LoadFx("sfx/target.wav");
-	advance_letter_fx = App->audio->LoadFx("sfx/advance_letter.wav");
+	//App->audio->PlayMusic("music/house_music.ogg");
+	//bonus_fx = App->audio->LoadFx("sfx/bonus.wav");
+	//chocolate_combo_sfx = App->audio->LoadFx("sfx/chocolate_combo.wav");
+	//targets_fx = App->audio->LoadFx("sfx/target.wav");
+	//advance_letter_fx = App->audio->LoadFx("sfx/advance_letter.wav");
 	return ret;
 }
 
@@ -126,7 +126,7 @@ bool ModuleSceneIntro::CleanUp()
 update_status ModuleSceneIntro::Update()
 {
 	// Logic ==================================================================
-	if (reset)
+	/*if (reset)
 	{
 		// Bodies ---------------------------------
 		if (left_barrier == NULL) create_left_barrier = true;
@@ -265,8 +265,6 @@ update_status ModuleSceneIntro::Update()
 
 	// All draw functions ======================================================
 
-	// --------Background---------------------------------------
-	App->renderer->Blit(background_tex, SCREEN_WIDTH / 2 - pinball_rect.w / 2, 0, &pinball_rect);
 	// -------Combo letters ------------------------------------
 	for (uint i = 0; i < combo_letters_amount; ++i)
 	{
@@ -324,13 +322,17 @@ update_status ModuleSceneIntro::Update()
 	//--------Bonus Points--------------------------------------
 	App->renderer->Blit(multiplier_tex, pos_multiplier_bonus[ App->ui->multiplier -1].x, pos_multiplier_bonus[App->ui->multiplier - 1].y, &points_rect);
 	App->renderer->Blit(bonus_tex, pos_magnet_bonus[(int)current_bonus].x, pos_magnet_bonus[(int)current_bonus].y, &points_rect);
+	*/
+
+	// --------Background---------------------------------------
+	App->renderer->Blit(background_tex, SCREEN_WIDTH / 2 - pinball_rect.w / 2, 0, &pinball_rect);
 
 	return UPDATE_CONTINUE;
 }
 
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB, b2Contact* contact)
 {
-	// Sensors ========================================================================
+	/*// Sensors ========================================================================
 	if (sensor_barrier_right == bodyA && App->player->ball == bodyB && right_barrier == nullptr)
 	{
 		create_right_barrier = true;
@@ -349,7 +351,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB, b2Contact* 
 	else if (magnet_hole == bodyA && App->player->ball == bodyB && left_barrier)
 	{
 		// Bonuses ==================================
-		switch ((Bonuses)current_bonus) {
+	/*	switch ((Bonuses)current_bonus) {
 		case Bonuses::extra_ball:
 			++App->player->lifes;
 			if (App->player->lifes > 9)
@@ -376,27 +378,27 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB, b2Contact* 
 	{
 		keep_player_top = true;
 		// Add points ================================
-		App->ui->AddPoints(5000);
+	//	App->ui->AddPoints(5000);
 		return;
 	}
 	// Targets ========================================================================
 	else if (final_target && final_target == bodyA && App->player->ball == bodyB && activate_final_target)
 	{
 		// Add points ================================
-		App->ui->AddPoints(10000);
+		//App->ui->AddPoints(10000);
 		// Logic =====================================
 		final_target->to_delete = true;
 		if (combo_letters_amount < 8) 
 		{
-			++combo_letters_amount;
-			App->audio->PlayFx(advance_letter_fx);
+		//	++combo_letters_amount;
+			//App->audio->PlayFx(advance_letter_fx);
 		}
 		else 
 		{
-			App->audio->PlayFx(chocolate_combo_sfx);
+			//App->audio->PlayFx(chocolate_combo_sfx);
 			combo_letters_amount = 0;
 			// Add points ================================
-			App->ui->AddPoints(1000000);
+			//App->ui->AddPoints(1000000);
 		}
 		combo_delay = true;
 	}
@@ -407,19 +409,19 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB, b2Contact* 
 		{
 			targets[i]->to_delete = true;
 			// Add points ================================
-			App->ui->AddPoints(2000);
-			App->audio->PlayFx(targets_fx);
+		//	App->ui->AddPoints(2000);
+		//	App->audio->PlayFx(targets_fx);
 			break;
 		}
-	}
+	}*/
 }
 
 void ModuleSceneIntro::AddStaticBodies()
 {
 	//Bumpers============================================
-	bumpers.add(App->physics->CreateCircle(SCREEN_WIDTH / 2 + 29, SCREEN_HEIGHT / 2 - 222, 27, false));
-	bumpers.add(App->physics->CreateCircle(SCREEN_WIDTH / 2 - 85, SCREEN_HEIGHT / 2 - 222, 27, false));
-	bumpers.add(App->physics->CreateCircle(SCREEN_WIDTH / 2 - 29, SCREEN_HEIGHT / 2 - 135, 27, false));
+	bumpers.add(App->physics->CreateCircle(SCREEN_WIDTH / 2 -268, SCREEN_HEIGHT / 2 - 235, 27, false));
+	bumpers.add(App->physics->CreateCircle(SCREEN_WIDTH / 2 - 336, SCREEN_HEIGHT / 2 - 348, 27, false));
+	bumpers.add(App->physics->CreateCircle(SCREEN_WIDTH / 2 - 140, SCREEN_HEIGHT / 2 - 207, 27, false));
 
 	//Slingshots============================================
 	int Triangle_left[6] = {
@@ -446,8 +448,8 @@ void ModuleSceneIntro::AddStaticBodies()
 	//OUR PINBALL
 
 	int Pinball[180] = {
-		1034, 1039,
-		1084, 1039,
+		1034, 1100,
+		1084, 1100,
 		1083, 213,
 		1071, 170,
 		1041, 125,

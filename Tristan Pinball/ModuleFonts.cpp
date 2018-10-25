@@ -1,4 +1,4 @@
-#include "Globals.h"
+/*#include "Globals.h"
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
@@ -120,4 +120,4 @@ uint ModuleFonts::Get_CharWidth(int fontId) const
 		LOG("Accessing invalid font! SDL_Error: %s\n", SDL_GetError());//This is not a SDL error, but hopefully it will crash if we access an invalid font
 	}
 	return fonts[fontId].char_w;
-}
+}*/
