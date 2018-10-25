@@ -422,86 +422,24 @@ void ModuleSceneIntro::AddStaticBodies()
 	bumpers.add(App->physics->CreateCircle(SCREEN_WIDTH / 2 - 29, SCREEN_HEIGHT / 2 - 135, 27, false));
 
 	//Slingshots============================================
-	int LeftStruct[26] = {
-	80, 727,
-	80, 821,
-	80, 827,
-	85, 831,
-	130, 856,
-	138, 857,
-	142, 854,
-	145, 850,
-	144, 844,
-	100, 720,
-	96, 716,
-	84, 717,
-	80, 721
+	int Triangle_left[6] = {
+		397, 744,
+		396, 867,
+		528, 954
 	};
 
-	slingshots.add(App->physics->CreateChain(0, 0, LeftStruct, 26, false));
+	slingshots.add(App->physics->CreateChain(0, 0, Triangle_left, 6, false));
 
-	int RightStruct[26] = {
-		321, 846,
-		322, 852,
-		328, 856,
-		334, 857,
-		340, 855,
-		383, 829,
-		386, 825,
-		386, 722,
-		382, 716,
-		374, 715,
-		367, 717,
-		364, 722,
-		323, 842
+	int Triangle_right[8] = {
+		760, 950,
+		884, 742,
+		892, 743,
+		892, 872
 	};
 
-	slingshots.add(App->physics->CreateChain(0, 0, RightStruct, 26, false));
+	slingshots.add(App->physics->CreateChain(0, 0, Triangle_right, 8, false));
 
-	//Board parts=============================================================
-	int BigStruct[52] = {
-		98, 402,
-		102, 397,
-		103, 389,
-		101, 376,
-		83, 290,
-		154, 230,
-		195, 232,
-		198, 228,
-		200, 223,
-		200, 217,
-		197, 212,
-		110, 176,
-		103, 180,
-		95, 187,
-		78, 209,
-		66, 232,
-		61, 248,
-		56, 266,
-		55, 289,
-		55, 313,
-		59, 338,
-		64, 360,
-		72, 381,
-		81, 395,
-		88, 402,
-		94, 403
-	};
-	
-	board_parts.add(App->physics->CreateChain(0, 0, BigStruct, 52, false));
-
-	int LeftLine[16] = {
-		49, 739,
-		50, 847,
-		143, 901,
-		143, 904,
-		140, 904,
-		45, 848,
-		45, 739,
-		47, 737
-	};
-
-	board_parts.add(App->physics->CreateChain(0, 0, LeftLine, 16, false));
+	//Board parts============================================================
 
 	
 
@@ -617,7 +555,7 @@ void ModuleSceneIntro::AddStaticBodies()
 		524, 380
 	};
 
-	App->physics->CreateChain(0, 0, Cruz, 18);
+	board_parts.add(App->physics->CreateChain(0, 0, Cruz, 18, false));
 
 	int fireh[10] = {
 		531, 438,
@@ -626,6 +564,7 @@ void ModuleSceneIntro::AddStaticBodies()
 		409, 525,
 		390, 487
 	};
+	board_parts.add(App->physics->CreateChain(0, 0, fireh, 10, false));
 
 	int firev[14] = {
 		917, 200,
@@ -637,25 +576,10 @@ void ModuleSceneIntro::AddStaticBodies()
 		925, 198
 	};
 
-	App->physics->CreateChain(0, 0, firev, 14);
+	board_parts.add(App->physics->CreateChain(0, 0, firev, 14, false));
 
 
-	int Triangle_left[6] = {
-		397, 744,
-		396, 867,
-		528, 954
-	};
-
-	App->physics->CreateChain(0, 0, Triangle_left, 6);
-
-	int Triangle_right[8] = {
-		760, 950,
-		884, 742,
-		892, 743,
-		892, 872
-	};
-
-	App->physics->CreateChain(0, 0, Triangle_right, 8);
+	
 
 	int carril_I[12] = {
 		344, 744,
@@ -666,7 +590,7 @@ void ModuleSceneIntro::AddStaticBodies()
 		336, 742
 	};
 
-	App->physics->CreateChain(0, 0, carril_I, 12);
+	board_parts.add(App->physics->CreateChain(0, 0, carril_I, 12, false));
 
 	int carril_D[12] = {
 		945, 743,
@@ -677,7 +601,7 @@ void ModuleSceneIntro::AddStaticBodies()
 		954, 743
 	};
 
-	App->physics->CreateChain(0, 0, carril_D, 12);
+	board_parts.add(App->physics->CreateChain(0, 0, carril_D, 12, false));
 
 	int Barra_1[8] = {
 		703, 156,
@@ -686,7 +610,7 @@ void ModuleSceneIntro::AddStaticBodies()
 		717, 156
 	};
 
-	App->physics->CreateChain(0, 0, Barra_1, 8);
+	board_parts.add(App->physics->CreateChain(0, 0, Barra_1, 8, false));
 
 	int Barra_2[8] = {
 		767, 169,
@@ -695,7 +619,7 @@ void ModuleSceneIntro::AddStaticBodies()
 		782, 170
 	};
 
-	App->physics->CreateChain(0, 0, Barra_2, 8);
+	board_parts.add(App->physics->CreateChain(0, 0, Barra_2, 8, false));
 
 	int Barra_3[8] = {
 		833, 181,
@@ -704,7 +628,7 @@ void ModuleSceneIntro::AddStaticBodies()
 		848, 182
 	};
 
-	App->physics->CreateChain(0, 0, Barra_3, 8);
+	board_parts.add(App->physics->CreateChain(0, 0, Barra_3, 8, false));
 
 	int Barra_4[8] = {
 		913, 200,
@@ -713,6 +637,6 @@ void ModuleSceneIntro::AddStaticBodies()
 		912, 298
 	};
 
-	App->physics->CreateChain(0, 0, Barra_4, 8);
+	board_parts.add(App->physics->CreateChain(0, 0, Barra_4, 8, false));
 
 }

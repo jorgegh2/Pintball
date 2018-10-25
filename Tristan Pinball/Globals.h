@@ -30,4 +30,4 @@ enum update_status
 #define WIN_FULLSCREEN_DESKTOP false
 #define MINIMIZE false
 #define VSYNC true
-#define TITLE "Chocolate Pinball"
+#define TITLE "Tristan Pinball"

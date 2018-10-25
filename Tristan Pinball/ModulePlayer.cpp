@@ -18,8 +18,8 @@ ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, s
 	init_position.x = PIXEL_TO_METERS(489);
 	init_position.y = PIXEL_TO_METERS(900);
 	impulse_force = 0.0f;
-	launcher_init_pos.x = 487.0f;
-	launcher_init_pos.y = 912.0f + 16;
+	launcher_init_pos.x = 1062.f;
+	launcher_init_pos.y = 1050.f;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -51,7 +51,7 @@ bool ModulePlayer::Start()
 		-70 ,-7
 	};
 	
-	ball = App->physics->CreateCircle(489, 900, 11);
+	ball = App->physics->CreateCircle(1062, 1000, 11);
 	ball->body->SetBullet(true);
 	ball->listener = this;
 
@@ -153,8 +153,8 @@ update_status ModulePlayer::Update()
 	//--------Launcher----------------------------------------------
 	int x, y;
 	launcher->GetPosition(x, y);
-	SDL_Rect rect = { x ,  y, 33, 33 };
-	App->renderer->DrawQuad(rect, 255, 255, 255);
+	//SDL_Rect rect = { x ,  y, 33, 33 };
+	//App->renderer->DrawQuad(rect, 255, 255, 255);
 
 	// -------Flippers----------------------------------------------
 	flipper_l->GetPosition(x, y);
