@@ -28,7 +28,7 @@ bool ModuleSceneIntro::Start()
 	box = App->textures->Load("pinball/crate.png");
 	rick = App->textures->Load("pinball/rick_head.png");
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
-
+	Bg = App->textures->Load("pinball/Pinball_Start.png");
 	//sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50, this);
 
 
@@ -306,6 +306,8 @@ update_status ModuleSceneIntro::Update()
 
 	// All draw functions ------------------------------------------------------
 	p2List_item<PhysBody*>* c = circles.getFirst();
+	SDL_Rect y = { 0,0,1920,1200 };
+	//App->renderer->Blit(Bg, 0, 0, &y);
 
 	while(c != NULL)
 	{

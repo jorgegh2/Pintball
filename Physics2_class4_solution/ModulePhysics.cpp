@@ -32,7 +32,7 @@ bool ModulePhysics::Start()
 	world->SetContactListener(this);
 
 	// needed to create joints like mouse joint
-	b2BodyDef bd;
+	/*b2BodyDef bd;
 	ground = world->CreateBody(&bd);
 
 	// big static circle as "ground" in the middle of the screen
@@ -52,7 +52,7 @@ bool ModulePhysics::Start()
 	b2FixtureDef fixture;
 	fixture.shape = &shape;
 	big_ball->CreateFixture(&fixture);
-
+	*/
 	return true;
 }
 
